@@ -19,17 +19,17 @@ class BoardTest < Minitest::Test
     assert_equal Tile, board.board[0][0].class
   end
 
-  def test_board_can_have_ships_placed_on_it
-    board = Board.construct
-    ship = Ship.new
+  # def test_board_can_have_ships_placed_on_it
+  #   board = Board.construct
+  #   ship = Ship.new
 
 
-    board.place(ship, "A1", "A2") # refactor to accept user/cpu argument?
+  #   board.place(ship, "A1", "A2") # refactor to accept user/cpu argument?
 
-    assert board.board[0][0].ship?
-    assert board.board[0][1].ship?
-    refute board.board[1][1].ship?
-  end
+  #   assert board.board[0][0].ship?
+  #   assert board.board[0][1].ship?
+  #   refute board.board[1][1].ship?
+  # end
 
 
 end
