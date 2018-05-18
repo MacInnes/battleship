@@ -1,6 +1,3 @@
-require './lib/tile'
-require './lib/board'
-
 class Ship
   attr_reader :length,
               :hits

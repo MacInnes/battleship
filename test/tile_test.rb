@@ -39,7 +39,7 @@ class TileTest < Minitest::Test
 
     tile.status = "M"
 
-    assert_equal "M", tile.status
+    assert_equal "M",
   end
 
 end
