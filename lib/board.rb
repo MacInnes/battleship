@@ -9,14 +9,10 @@ class Board
   end
 
   def self.construct
-    board = []
-    4.times do
-      temp = []
-      4.times do
-        tile = Tile.new
-        temp << tile
+    board = 4.times.map do
+      4.times.map do
+        Tile.new
       end
-      board << temp
     end
     new(board)
   end
