@@ -27,7 +27,7 @@ class Board
 
     row_1 = pos_1[0]
     column_1 = pos_1[1]
-
+    
   end
 
 end
