@@ -5,6 +5,7 @@ class Ship
   def initialize(length = 2)
     @length = length
     @hits = 0
+    @rubocop_test = 0
   end
 
   def hit

@@ -25,3 +25,7 @@ jobs:
       - run:
           name: run tests
           command: rake test
+
+      - run:
+          name: lint
+          command: "gem install rubocop && rubocop"
