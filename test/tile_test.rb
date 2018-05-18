@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
+require './test/test_helper'
 require './lib/tile'
 
 class TileTest < Minitest::Test
@@ -39,7 +38,7 @@ class TileTest < Minitest::Test
 
     tile.status = "M"
 
-    assert_equal "M",
+    assert_equal "M", tile.status
   end
 
 end
