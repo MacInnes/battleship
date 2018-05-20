@@ -61,6 +61,37 @@ class BoardTest < Minitest::Test
     refute board.place(ship_3, "A4", "B3", "C2")
   end
 
+  def test_board_can_be_shot
+    board = Board.construct
+    ship = Ship.new
+
+    board.place(ship, "A1", "A2")
+
+    assert_nil board.board[0][0].status
+
+    board.shoot("A1")
+
+    assert_equal "H", board.board[0][0].status
+
+    board.shoot("B1")
+
+    assert_equal "M", board.board[1][0].status
+
+  end
+
+  def test_ship_can_be_sunk
+    board = Board.construct
+    ship = Ship.new
+
+    board.place(ship, "A1", "A2")
+
+    board.shoot("A1")
+    board.shoot("A2")
+
+    assert_equal ship, board.board[0][0].ship_name
+    refute_equal ship, board.board[1][1].ship_name
+  end
+
 
 end
 

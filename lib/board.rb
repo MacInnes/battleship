@@ -37,15 +37,20 @@ class Board
       column_3 = pos_3.chars[1].to_i - 1
       if verify_placement(row_1, column_1, row_2, column_2, row_3, column_3)      
         @board[row_1][column_1].ship = true
+        @board[row_1][column_1].ship_name = ship
         @board[row_2][column_2].ship = true
+        @board[row_2][column_2].ship_name = ship
         @board[row_3][column_3].ship = true
+        @board[row_3][column_3].ship_name = ship
         return true
       else
         return false
       end
     elsif verify_placement(row_1, column_1, row_2, column_2)      
         @board[row_1][column_1].ship = true
+        @board[row_1][column_1].ship_name = ship
         @board[row_2][column_2].ship = true
+        @board[row_2][column_2].ship_name = ship
         return true
     else
       return false #????  everything else returns side effects, this doesn't make sense
@@ -88,5 +93,30 @@ class Board
     return !spot_taken && aligned
   end
 
-
+  def shoot(position)
+    board_key = {
+      "A" => 0,
+      "B" => 1,
+      "C" => 2,
+      "D" => 3
+    }
+    row = board_key[position.chars[0]]
+    column = position.chars[1].to_i - 1
+    if @board[row][column].ship?
+      @board[row][column].status = "H"
+      @board[row][column].ship_name.hit
+    else
+      @board[row][column].status = "M"
+    end
+  end
 end
+
+
+
+
+
+
+
+
+
+
