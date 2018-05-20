@@ -1,5 +1,6 @@
 require './test/test_helper'
 require './lib/tile'
+require './lib/ship'
 
 class TileTest < Minitest::Test
 
@@ -48,10 +49,11 @@ class TileTest < Minitest::Test
   end
 
   def test_ship_name_can_be_reassigned
-    tile = Tile.new
-    tile.ship_name = "Boaty McBoatFace"
 
-    assert_equal "Boaty McBoatFace", tile.ship_name
+    tile = Tile.new
+    ship = Ship.new
+    tile.ship_name = ship
+    assert_equal ship, tile.ship_name
   end
 
 end
