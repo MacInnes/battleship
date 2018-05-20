@@ -41,4 +41,17 @@ class TileTest < Minitest::Test
     assert_equal "M", tile.status
   end
 
+  def test_ship_name_defaults_to_nil
+    tile = Tile.new
+
+    assert_nil tile.ship_name
+  end
+
+  def test_ship_name_can_be_reassigned
+    tile = Tile.new
+    tile.ship_name = "Boaty McBoatFace"
+
+    assert_equal "Boaty McBoatFace", tile.ship_name
+  end
+
 end
