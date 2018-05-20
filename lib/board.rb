@@ -35,7 +35,6 @@ class Board
     if pos_3
       row_3 = board_key[pos_3.chars[0]]
       column_3 = pos_3.chars[1].to_i - 1
-      # binding.pry
       if verify_placement(row_1, column_1, row_2, column_2, row_3, column_3)      
         @board[row_1][column_1].ship = true
         @board[row_2][column_2].ship = true
@@ -86,7 +85,6 @@ class Board
     else
       aligned = false
     end
-    # binding.pry
     return !spot_taken && aligned
   end
 

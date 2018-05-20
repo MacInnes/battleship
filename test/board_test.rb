@@ -6,14 +6,12 @@ require './lib/ship'
 class BoardTest < Minitest::Test
 
   def test_exists
-    skip
     board = Board.construct
 
     assert_instance_of Board, board
   end
 
   def test_constructs_2D_array_of_tiles
-    skip
     board = Board.construct
 
     assert_equal 4, board.board.length
@@ -22,7 +20,6 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_can_have_ships_placed_on_it
-    skip
     board = Board.construct
     ship = Ship.new
 
@@ -44,7 +41,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_will_fail_invalidly_placed_ships
-    
+
     board = Board.construct
     ship_1 = Ship.new
     ship_2 = Ship.new
