@@ -1,3 +1,5 @@
+
+
 class Tile
   attr_accessor :ship,
                 :status

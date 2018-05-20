@@ -1,5 +1,6 @@
 require './lib/tile'
 require './lib/ship'
+require 'pry'
 
 class Board
   attr_reader :board
@@ -34,11 +35,14 @@ class Board
     if pos_3
       row_3 = board_key[pos_3.chars[0]]
       column_3 = pos_3.chars[1].to_i - 1
+      # binding.pry
       if verify_placement(row_1, column_1, row_2, column_2, row_3, column_3)      
         @board[row_1][column_1].ship = true
         @board[row_2][column_2].ship = true
         @board[row_3][column_3].ship = true
         return true
+      else
+        return false
       end
     elsif verify_placement(row_1, column_1, row_2, column_2)      
         @board[row_1][column_1].ship = true
@@ -51,12 +55,39 @@ class Board
   end
 
   def verify_placement(row_1, column_1, row_2, column_2, row_3 = nil, column_3 = nil)
+
+    # this checks if a ship has been placed on any tile already
     if @board[row_1][column_1].ship? || @board[row_2][column_2].ship?
-      return false
+      spot_taken = true
     elsif row_3
-      return !@board[row_1][column_1].ship?
+      spot_taken = @board[row_3][column_3].ship?
     end
-    return true
+
+    # this checks for a valid alignment
+    if row_3
+      if row_3 == row_1 && row_3 == row_2
+        column_difference = (column_1 - column_2).abs
+        column_difference_2 = (column_2 - column_3).abs
+        aligned = column_difference == 1 && column_difference_2 == 1
+
+      elsif column_3 == column_1 && column_3 == column_2
+        row_difference = (row_1 - row_2).abs
+        row_difference_2 = (row_2 - row_3).abs
+        aligned = row_difference == 1 && row_difference_2 == 1
+      else
+        aligned = false
+      end
+    elsif row_1 == row_2
+      column_difference = (column_1 - column_2).abs
+      aligned = column_difference == 1
+    elsif column_1 == column_2
+      row_difference = (row_1 - row_2).abs
+      aligned = row_difference == 1
+    else
+      aligned = false
+    end
+    # binding.pry
+    return !spot_taken && aligned
   end
 
 
