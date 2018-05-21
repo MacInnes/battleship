@@ -22,7 +22,7 @@ class ComputerPlacement
     start_row = random.rand(4)
     start_column = random.rand(4)
     
-    
+
     if choose_vert_vs_horizontal == 0 # vertical
       end_column = start_column
       if start_row == 3
@@ -41,8 +41,8 @@ class ComputerPlacement
       end
     end
 
-    start_point = @key[start_row] + start_column.to_s
-    end_point = @key[end_row] + end_column.to_s
+    start_point = @key[start_row] + (start_column + 1).to_s
+    end_point = @key[end_row] + (end_column + 1).to_s
 
     board.place(ship, start_point, end_point)
 

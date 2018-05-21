@@ -106,9 +106,10 @@ class Board
   end
 
   def shoot(position)
-    
     row = @board_key[position.chars[0]]
     column = position.chars[1].to_i - 1
+    
+    
     if @board[row][column].ship?
       @board[row][column].status = "H"
       @board[row][column].ship_name.hit
