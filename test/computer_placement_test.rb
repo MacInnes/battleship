@@ -4,7 +4,7 @@ require "./lib/board"
 require "./lib/tile"
 require "./lib/ship"
 require "./lib/computer_placement"
-require "pry"
+
 
 class TestComputerPlacement < Minitest::Test
   def test_exists
@@ -31,7 +31,7 @@ class TestComputerPlacement < Minitest::Test
   end
 
   def test_selects_three_valid_points
-    
+
   end
 
 end

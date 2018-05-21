@@ -5,12 +5,16 @@ require './lib/ship'
 class ShipTest < Minitest::Test
 
   def test_exists
+    
+
     ship = Ship.new
 
     assert_instance_of Ship, ship
   end
 
   def test_length_can_be_assigned_as_argument
+    
+
     ship_2 = Ship.new
     ship_3 = Ship.new(3)
 
@@ -19,6 +23,8 @@ class ShipTest < Minitest::Test
   end
 
   def test_can_be_hit
+    
+
     ship = Ship.new
     ship.hit
 
@@ -26,6 +32,8 @@ class ShipTest < Minitest::Test
   end
 
   def test_can_be_sunk
+    
+
     ship = Ship.new
     ship.hit
 

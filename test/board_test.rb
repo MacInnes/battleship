@@ -24,15 +24,15 @@ class BoardTest < Minitest::Test
     ship = Ship.new
 
 
-    board.place(ship, "A1", "A2") # refactor to accept user/cpu argument?
+    # board.place(ship, "A1", "A2") # refactor to accept user/cpu argument?
 
-    assert board.board[0][0].ship?
-    assert board.board[0][1].ship?
-    refute board.board[1][1].ship?
+    # assert board.board[0][0].ship?
+    # assert board.board[0][1].ship?
+    # refute board.board[1][1].ship?
 
     ship_3 = Ship.new(3)
 
-    board.place(ship_3, "B1", "B2", "B3")
+    board.place(ship_3, "B1", "B3")
 
     assert board.board[1][0].ship?
     assert board.board[1][1].ship?
@@ -41,7 +41,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_board_will_fail_invalidly_placed_ships
-
+  
     board = Board.construct
     ship_1 = Ship.new
     ship_2 = Ship.new
@@ -55,13 +55,14 @@ class BoardTest < Minitest::Test
     refute board.place(ship_1, "C4", "C1") # wrap vertically
     refute board.place(ship_1, "B2", "C3") # diagonal
 
-    assert board.place(ship_3, "C1", "C2", "C3")
-    refute board.place(ship_3, "A1", "B1", "C1")
-    refute board.place(ship_3, "B1", "B2", "B4")
-    refute board.place(ship_3, "A4", "B3", "C2")
+    assert board.place(ship_3, "C1", "C3")
+    refute board.place(ship_3, "A1", "C1")
+    refute board.place(ship_3, "B1", "B4")
+    refute board.place(ship_3, "A4", "C2")
   end
 
   def test_board_can_be_shot
+  
     board = Board.construct
     ship = Ship.new
 
@@ -80,6 +81,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_ship_can_be_sunk
+  
     board = Board.construct
     ship = Ship.new
 
