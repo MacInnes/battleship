@@ -8,7 +8,7 @@ require './lib/computer_placement'
 require 'pry'
 
 
-class TestComputerPlacement < Minitest::Test
+class ComputerPlacementTest < Minitest::Test
   def test_exists
     computer = ComputerPlacement.new
 
