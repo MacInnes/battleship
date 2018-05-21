@@ -22,22 +22,22 @@ class ComputerPlacement
     start_row = random.rand(4)
     start_column = random.rand(4)
     
-
+    offset = ship.length - 1
     if choose_vert_vs_horizontal == 0 # vertical
       end_column = start_column
-      if start_row == 3
+      if (start_row + offset) > 3
         end_row = 3
-        start_row = 2
+        start_row = 3 - offset
       else
-        end_row = start_row + 1
+        end_row = start_row + offset
       end
     else # horizontal
       end_row = start_row
-      if start_column == 3
+      if (start_column + offset) > 3
         end_column = 3
-        start_column = 2
+        start_column = 3 - offset
       else
-        end_column = start_column + 1
+        end_column = start_column + offsetg
       end
     end
 
