@@ -1,9 +1,11 @@
-require "minitest/autorun"
-require "minitest/pride"
-require "./lib/board"
-require "./lib/tile"
-require "./lib/ship"
-require "./lib/computer_placement"
+require 'minitest/autorun'
+require 'minitest/pride'
+require './test/test_helper'
+require './lib/board'
+require './lib/tile'
+require './lib/ship'
+require './lib/computer_placement'
+require 'pry'
 
 
 class TestComputerPlacement < Minitest::Test
@@ -26,7 +28,7 @@ class TestComputerPlacement < Minitest::Test
         tile.ship_name == cpu_ship
       end
     end.flatten.length
-
+    # binding.pry
     assert_equal 2, actual
   end
 
