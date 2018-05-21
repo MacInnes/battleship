@@ -49,4 +49,12 @@ class ComputerPlacementTest < Minitest::Test
     assert_equal 3, actual
   end
 
+  def find_not_nil_tile_count(board)
+    return board.board.map do |row|
+      row.select do |tile|
+        tile.status != nil
+      end
+    end.flatten.length
+  end
+
 end

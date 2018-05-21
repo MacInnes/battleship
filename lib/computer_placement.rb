@@ -37,7 +37,7 @@ class ComputerPlacement
         end_column = 3
         start_column = 3 - offset
       else
-        end_column = start_column + offsetg
+        end_column = start_column + offset
       end
     end
 
