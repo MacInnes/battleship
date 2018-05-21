@@ -7,6 +7,12 @@ class Board
 
   def initialize(board)
     @board = board
+    @board_key = {
+      "A" => 0,
+      "B" => 1,
+      "C" => 2,
+      "D" => 3
+    }
   end
 
   def self.construct
@@ -18,89 +24,90 @@ class Board
     new(board)
   end
 
-  def place(ship, pos_1, pos_2, pos_3 = nil)
-    board_key = {
-      "A" => 0,
-      "B" => 1,
-      "C" => 2,
-      "D" => 3
-    }
+  def place(ship, pos_1, pos_2)
+    start_row = @board_key[pos_1.chars[0]]
+    start_column = pos_1.chars[1].to_i - 1
+    end_row = @board_key[pos_2.chars[0]]
+    end_column = pos_2.chars[1].to_i - 1
 
-    row_1 = board_key[pos_1.chars[0]]
-    column_1 = pos_1.chars[1].to_i - 1
-
-    row_2 = board_key[pos_2.chars[0]]
-    column_2 = pos_2.chars[1].to_i - 1
-
-    if pos_3
-      row_3 = board_key[pos_3.chars[0]]
-      column_3 = pos_3.chars[1].to_i - 1
-      if verify_placement(row_1, column_1, row_2, column_2, row_3, column_3)      
-        @board[row_1][column_1].ship = true
-        @board[row_1][column_1].ship_name = ship
-        @board[row_2][column_2].ship = true
-        @board[row_2][column_2].ship_name = ship
-        @board[row_3][column_3].ship = true
-        @board[row_3][column_3].ship_name = ship
-        return true
+    if ship.length === 3
+      if start_row == end_row
+        mid_row = start_row
+        mid_column = (end_column + start_column) / 2
       else
-        return false
+        mid_column = start_column
+        mid_row = (end_row + start_row) / 2
       end
-    elsif verify_placement(row_1, column_1, row_2, column_2)      
-        @board[row_1][column_1].ship = true
-        @board[row_1][column_1].ship_name = ship
-        @board[row_2][column_2].ship = true
-        @board[row_2][column_2].ship_name = ship
-        return true
-    else
-      return false #????  everything else returns side effects, this doesn't make sense
     end
 
+    if verify_placement(ship, pos_1, pos_2)
+      @board[start_row][start_column].ship = true
+      @board[start_row][start_column].ship_name = ship
+      @board[end_row][end_column].ship = true
+      @board[end_row][end_column].ship_name = ship
+      if ship.length == 3
+        @board[mid_row][mid_column].ship = true
+        @board[mid_row][mid_column].ship_name = ship
+      end
+      return true
+    end
+    return false
   end
 
-  def verify_placement(row_1, column_1, row_2, column_2, row_3 = nil, column_3 = nil)
+  def verify_placement(ship, pos_1, pos_2)
+    start_row = @board_key[pos_1.chars[0]]
+    start_column = pos_1.chars[1].to_i - 1
+    end_row = @board_key[pos_2.chars[0]]
+    end_column = pos_2.chars[1].to_i - 1
 
-    # this checks if a ship has been placed on any tile already
-    if @board[row_1][column_1].ship? || @board[row_2][column_2].ship?
-      spot_taken = true
-    elsif row_3
-      spot_taken = @board[row_3][column_3].ship?
-    end
 
-    # this checks for a valid alignment
-    if row_3
-      if row_3 == row_1 && row_3 == row_2
-        column_difference = (column_1 - column_2).abs
-        column_difference_2 = (column_2 - column_3).abs
-        aligned = column_difference == 1 && column_difference_2 == 1
+    valid_choice = true
+    not_diagonal = true
+    correct_spacing = true
+    no_ships = true
 
-      elsif column_3 == column_1 && column_3 == column_2
-        row_difference = (row_1 - row_2).abs
-        row_difference_2 = (row_2 - row_3).abs
-        aligned = row_difference == 1 && row_difference_2 == 1
+    offset = ship.length - 1
+
+    if ship.length === 3
+      if start_row == end_row
+        mid_row = start_row
+        mid_column = (end_column + start_column) / 2
       else
-        aligned = false
+        mid_column = start_column
+        mid_row = (end_row + start_row) / 2
       end
-    elsif row_1 == row_2
-      column_difference = (column_1 - column_2).abs
-      aligned = column_difference == 1
-    elsif column_1 == column_2
-      row_difference = (row_1 - row_2).abs
-      aligned = row_difference == 1
-    else
-      aligned = false
+      if @board[mid_row][mid_column].ship?
+        no_ships = false
+      end
     end
-    return !spot_taken && aligned
+
+    if @board[start_row][start_column].ship? || @board[end_row][end_column].ship?
+      no_ships = false
+    end
+
+    if !start_column.between?(0,3) || !end_column.between?(0,3) || start_row == nil || end_row == nil
+      valid_choice = false
+    end
+
+    if start_row == end_row # horizontal
+      if (start_column - end_column).abs != offset
+        correct_spacing = false
+      end
+    elsif start_column == end_column # vertical
+      if (start_row - end_row).abs != offset
+        correct_spacing = false
+      end
+    else
+      not_diagonal = false
+    end
+
+    return valid_choice && not_diagonal && correct_spacing && no_ships
+
   end
 
   def shoot(position)
-    board_key = {
-      "A" => 0,
-      "B" => 1,
-      "C" => 2,
-      "D" => 3
-    }
-    row = board_key[position.chars[0]]
+    
+    row = @board_key[position.chars[0]]
     column = position.chars[1].to_i - 1
     if @board[row][column].ship?
       @board[row][column].status = "H"

@@ -8,14 +8,12 @@ require "./lib/computer_placement"
 
 class TestComputerPlacement < Minitest::Test
   def test_exists
-    skip
     computer = ComputerPlacement.new
 
     assert_instance_of ComputerPlacement, computer
   end
 
   def test_selects_two_valid_points
-    skip
     board = Board.construct
 
     computer_placement = ComputerPlacement.new
