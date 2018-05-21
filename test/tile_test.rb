@@ -5,18 +5,21 @@ require './lib/ship'
 class TileTest < Minitest::Test
 
   def test_exists
+    skip
     tile = Tile.new
 
     assert_instance_of Tile, tile
   end
 
   def test_ship_exists_defaults_to_false
+    skip
     tile = Tile.new
 
     refute tile.ship?
   end
 
   def test_can_reassign_ship_to_true
+    skip
     tile = Tile.new
 
     tile.ship = true
@@ -31,6 +34,7 @@ class TileTest < Minitest::Test
   end
 
   def test_tile_status_can_change
+    skip
     tile = Tile.new
 
     tile.status = "H"
@@ -43,12 +47,14 @@ class TileTest < Minitest::Test
   end
 
   def test_ship_name_defaults_to_nil
+    skip
     tile = Tile.new
 
     assert_nil tile.ship_name
   end
 
   def test_ship_name_can_be_reassigned
+    skip
 
     tile = Tile.new
     ship = Ship.new
