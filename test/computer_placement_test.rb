@@ -33,7 +33,28 @@ class ComputerPlacementTest < Minitest::Test
   end
 
   def test_selects_three_valid_points
+    board = Board.construct
 
+    computer_placement = ComputerPlacement.new
+    cpu_ship = Ship.new(3)
+
+    computer_placement.place_ship(cpu_ship, board)
+
+    actual = board.board.map do |row|
+      row.select do |tile|
+        tile.ship_name == cpu_ship
+      end
+    end.flatten.length
+    # binding.pry
+    assert_equal 3, actual
+  end
+
+  def find_not_nil_tile_count(board)
+    return board.board.map do |row|
+      row.select do |tile|
+        tile.status != nil
+      end
+    end.flatten.length
   end
 
 end
