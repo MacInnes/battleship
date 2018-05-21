@@ -31,7 +31,6 @@ class TestComputerPlacement < Minitest::Test
   end
 
   def test_selects_three_valid_points
-    skip
 
   end
 
