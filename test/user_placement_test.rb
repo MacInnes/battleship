@@ -4,7 +4,6 @@ require './test/test_helper'
 require './lib/board'
 require './lib/tile'
 require './lib/ship'
-require './lib/computer_placement'
 require './lib/user_placement'
 require 'pry'
 
@@ -23,7 +22,7 @@ class UserPlacementTest < Minitest::Test
 
     assert_equal true, user_placement.place_ship(user_ship, "A1", "A2", board)
 
-    actual = find_not_nil_tile_count(board)
+    actual = find_ship_tile_count(board)
 
     assert_equal 2, actual
   end
@@ -35,12 +34,12 @@ class UserPlacementTest < Minitest::Test
 
     assert_equal true, user_placement.place_ship(user_ship, "A1", "A3", board)
 
-    actual = find_not_nil_tile_count(board)
+    actual = find_ship_tile_count(board)
 
     assert_equal 3, actual
   end
 
-  def find_not_nil_tile_count(board)
+  def find_ship_tile_count(board)
     board.board.map do |row|
       row.select do |tile|
         tile.ship?
