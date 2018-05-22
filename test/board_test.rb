@@ -24,11 +24,11 @@ class BoardTest < Minitest::Test
     ship = Ship.new
 
 
-    # board.place(ship, "A1", "A2") # refactor to accept user/cpu argument?
+    board.place(ship, "A1", "A2") # refactor to accept user/cpu argument?
 
-    # assert board.board[0][0].ship?
-    # assert board.board[0][1].ship?
-    # refute board.board[1][1].ship?
+    assert board.board[0][0].ship?
+    assert board.board[0][1].ship?
+    refute board.board[1][1].ship?
 
     ship_3 = Ship.new(3)
 
