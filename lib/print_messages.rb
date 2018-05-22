@@ -37,6 +37,62 @@ Enter the squares for the two-unit ship:"
     end.join("\n")
   end
 
+  def player_shot_prompt
+    "Please enter the coordinates of your shot:"
+  end
+
+  def invalid_shot
+    "Invalid shot selection, please choose again:"
+  end
+
+  def invalid_placement
+    "Invalid ship placement, please try again:"
+  end
+
+  def hit
+    "You hit a ship!"
+  end
+
+  def miss
+    "Your shot missed."
+  end
+
+  def sunk
+    "You sunk a ship!"
+  end
+
+  def cpu_hit
+    "The computer hit one of your ships!"
+  end
+
+  def cpu_miss
+    "The computer missed."
+  end
+
+  def cpu_sunk
+    "The computer sunk one of your ships!"
+  end
+
+  def player_win(board)
+    total = count_moves(board)
+
+    "You won! It took you #{total} shots to win."
+  end
+
+  def cpu_win(board)
+    total = count_moves(board)
+
+    "The computer won, it took #{total} shots to win."
+  end
+
+  def count_moves(board)
+    return board.board.map do |row|
+      row.select do |tile|
+        tile.status != nil
+      end
+    end.flatten.length
+  end  
+
   def populate_line(output_row, board_row)
     board_row.each do |tile|
       if tile.status
