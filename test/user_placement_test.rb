@@ -4,7 +4,6 @@ require './test/test_helper'
 require './lib/board'
 require './lib/tile'
 require './lib/ship'
-require './lib/computer_placement'
 require './lib/user_placement'
 require 'pry'
 
