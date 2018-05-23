@@ -13,7 +13,7 @@ class ComputerTest < Minitest::Test
     board = Board.construct
     computer = Computer.new(board)
 
-    assert_equal computer.board, board
+    assert_equal board, computer.board
   end
 
   def test_place_selects_two_valid_points
