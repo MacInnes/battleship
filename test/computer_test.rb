@@ -54,8 +54,8 @@ class ComputerTest < Minitest::Test
   end
 
   def test_will_not_shoot_at_tile_already_shot
-    computer_moves = ComputerMoves.new
     board = Board.construct
+    computer_moves = Computer.new(board)
 
     computer_moves.move(board)
     computer_moves.move(board)
