@@ -1,21 +1,21 @@
-require "./lib/board"
-require "./lib/tile"
-require "./lib/ship"
-require "pry"
+require './lib/board'
+require './lib/ship'
 
-class ComputerPlacement
+class Computer
+  attr_reader :board
 
-  def initialize
-
+  def initialize(board)
+    @board = board
     @key = {
       0 => "A",
       1 => "B",
       2 => "C",
       3 => "D"
     }
+    @move_history = []
   end
-  
-  def place_ship(ship, board)
+
+  def place(ship, board)
     random = Random.new
 
     choose_vert_vs_horizontal = random.rand(2)
@@ -44,8 +44,21 @@ class ComputerPlacement
     start_point = @key[start_row] + (start_column + 1).to_s
     end_point = @key[end_row] + (end_column + 1).to_s
 
-    board.place(ship, start_point, end_point)
+    @board.place(ship, start_point, end_point)
 
+  end
+
+  def move(board)
+    random = Random.new
+    row = random.rand(4)
+    column = random.rand(4) + 1
+    position = @key[row] + column.to_s
+    if !@move_history.include? position
+      board.shoot(position)
+      @move_history << position
+    else
+      move(board)
+    end
   end
 
 end
