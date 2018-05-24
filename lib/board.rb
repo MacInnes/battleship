@@ -113,8 +113,14 @@ class Board
     if @board[row][column].ship?
       @board[row][column].status = "H"
       @board[row][column].ship_name.hit
+      if @board[row][column].ship_name.sunk?
+        return "sunk"
+      else 
+        return "H"
+      end
     else
       @board[row][column].status = "M"
+      return "M"
     end
   end
 end

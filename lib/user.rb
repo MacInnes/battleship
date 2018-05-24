@@ -17,7 +17,7 @@ class User
   end
 
   def move(board, position)
-    if !@position_history.include? position
+    if !@position_history.include? position && position.split(" ").length == 2
       board.shoot(position)
       @position_history << position
       return true
