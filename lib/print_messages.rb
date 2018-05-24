@@ -1,5 +1,3 @@
-require 'pry'
-
 class PrintMessages
 
   def start_game
@@ -21,6 +19,14 @@ Enter the squares for the two-unit ship:"
 
   def player_second_ship
     "Enter the squares (beginning and end) for the three-unit ship:"
+  end
+
+  def user_print_board(board)
+    "Your results:\n" + print_board(board)
+  end
+
+  def cpu_print_board(board)
+    "Computer's results:\n" + print_board(board)
   end
 
   def print_board(board)
@@ -85,6 +91,14 @@ Enter the squares for the two-unit ship:"
     "The computer won, it took #{total} shots to win."
   end
 
+  def instructions
+    "This is a game of Battleship.\nPlace your ships on your board, I'll do the same, then we take turns shooting at the board.\nThe board will show whether you've hit or missed a ship, once all of your opponent's ships are sunk you win!"
+  end
+
+  def quit
+    "Thanks for playing!"
+  end
+
   def count_moves(board)
     return board.board.map do |row|
       row.select do |tile|
@@ -102,8 +116,4 @@ Enter the squares for the two-unit ship:"
       end
     end
   end
-
-
-
-
 end

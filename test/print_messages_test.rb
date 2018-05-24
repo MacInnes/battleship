@@ -1,6 +1,6 @@
+require './test/test_helper'
 require 'minitest/autorun'
 require 'minitest/pride'
-require './test/test_helper'
 require './lib/print_messages'
 require './lib/board'
 
@@ -186,7 +186,19 @@ D
 
   end
 
+  def test_instructions
+    print_messages = PrintMessages.new
+    expected = "This is a game of Battleship.\nPlace your ships on your board, I'll do the same, then we take turns shooting at the board.\nThe board will show whether you've hit or missed a ship, once all of your opponent's ships are sunk you win!"
 
+    assert_equal expected, print_messages.instructions
+  end
+
+  def test_quit
+    print_messages = PrintMessages.new
+    expected = "Thanks for playing!"
+
+    assert_equal expected, print_messages.quit
+  end
 
 end
 

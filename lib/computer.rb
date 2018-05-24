@@ -41,11 +41,26 @@ class Computer
       end
     end
 
-    start_point = @key[start_row] + (start_column + 1).to_s
-    end_point = @key[end_row] + (end_column + 1).to_s
+    if verify_placement(ship, start_row, start_column, end_row, end_column)
+      start_point = @key[start_row] + (start_column + 1).to_s
+      end_point = @key[end_row] + (end_column + 1).to_s
+      @board.place(ship, start_point, end_point)
+    else
+      place(ship, board)
+    end
 
-    @board.place(ship, start_point, end_point)
+  end
 
+  def verify_placement(ship, start_row, start_column, end_row, end_column)
+    if @board.board[start_row][start_column].ship? || @board.board[end_row][end_column].ship?
+      return false
+    end 
+    if ship.length == 3
+      mid_row = (start_row + end_row) / 2
+      mid_column = (start_column + end_column) / 2
+      return !@board.board[mid_row][mid_column].ship?
+    end
+    return true
   end
 
   def move(board)
